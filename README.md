@@ -114,7 +114,3 @@ Additionally, the project was recognized for having one of the best visual desig
 media/demo.mp4
 
 ---
-│   ├── hardware.jpg
-│   └── demo.mp4
-│
-├── README.md

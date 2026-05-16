@@ -1,116 +1,76 @@
-# 🚦 Traffic Light Controller (FSM - Verilog & Digital Logic)
+# 🚦 4-Way Traffic Light Controller — FSM in Verilog
 
-##  Project Overview
-In this project, a 4-way traffic light controller was designed using both digital logic (Logisim) and Verilog HDL.
+A digital logic design project implementing a 4-way intersection traffic light controller using a **Finite State Machine (FSM)**, built and simulated in **Vivado**.
 
-The main goal was to understand how a real traffic system can be implemented without using a microcontroller, only with flip-flops and logic gates. The system works as a finite state machine (FSM) and changes the traffic lights in a fixed sequence.
-
----
-
-##  Features
-- 4-direction traffic light system  
-- FSM-based sequential design  
-- 24-cycle timing system  
-- Automatic switching between roads  
-- Clock-based synchronous operation  
+> 📌 This is a group project developed for the Digital Design course at Konya Food & Agriculture University.
 
 ---
 
-##  System Structure
-The design consists of two main parts:
+## 📌 Project Overview
 
-- A timer (5-bit counter) that counts from 0 to 23  
-- A road selector (2-bit) that determines which road is active  
-
-When the timer completes one cycle, the next road becomes active.
+This project models a real-world 4-way traffic intersection where each direction cycles through **Red → Green → Yellow** states. The FSM ensures that only one direction has a green light at any given time, preventing collisions.
 
 ---
 
-##  FSM State Diagram
+## ⚙️ How It Works
 
-![Traffic Light Controller FSM State Diagram](docs/state_diagram.png)
+The controller is implemented as a **Moore FSM** where outputs depend solely on the current state.
 
----
+**States:**
+| State | North-South | East-West |
+|-------|-------------|-----------|
+| S0    | 🟢 Green    | 🔴 Red    |
+| S1    | 🟡 Yellow   | 🔴 Red    |
+| S2    | 🔴 Red      | 🟢 Green  |
+| S3    | 🔴 Red      | 🟡 Yellow |
 
-##  Timing
-
-The system operates in a 24-cycle loop.
-
-| Phase | Count | Duration |
-|------|------|---------|
-| Red + Yellow | 0 | 1 cycle |
-| Green | 1–20 | 20 cycles |
-| Yellow | 21–23 | 3 cycles |
+**State transitions** are driven by a clock signal with configurable timing for each phase.
 
 ---
 
-##  Time (Example)
+## 🛠️ Tech Stack
 
-If 1 clock cycle is equal to 1 second:
-
-- Green → 20 seconds  
-- Yellow → 3 seconds  
-- Red + Yellow → 1 second  
+- **Language:** Verilog HDL
+- **Tool:** Xilinx Vivado (Simulation & Synthesis)
+- **Concept:** Finite State Machine (FSM), Digital Logic Design
 
 ---
 
-##  Red Light Behavior
-Each road stays red while the other roads are active.
+## 👥 Team & Contributions
 
-Total system cycle:
-4 roads × 24 cycles = 96 cycles
+This project was developed by a team of 4 students:
 
-For one road:
-- Green = 20 cycles  
-- Yellow = 3 cycles  
-- Red + Yellow = 1 cycle  
-- Red = remaining time (approximately 72 cycles)  
-
----
-
-##  Hardware Implementation
-The system was also implemented using physical components:
-
-- D Flip-Flops  
-- Logic gates (AND, OR, NOT)  
-- Breadboard connections  
-
-![Hardware](media/hardware.jpg)
+| Name | Contributions |
+|------|--------------|
+| **Mert Kaymak** | FSM design, Verilog coding |
+| Onur Özbedel | Project structure |
+| Ahmet Alperen Arslan | FSM design, Presentation & documentation |
+| Yalçın Kağan Çakır | simulation & testbench |
 
 ---
 
-##  Verilog Implementation
+## 🚀 Running the Simulation
 
-Main file:
-src/traffic_light.v
-
----
-
-##  Simulation Notes
-
-During the simulation, the timing was not always perfectly aligned with the theoretical values. There were some small deviations in the duration of the light phases.
-
-However, the overall logic of the system worked correctly:
-- The state transitions were consistent  
-- The traffic flow sequence was correct  
-- No conflicting signals were observed  
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/mert-kaymak/traffic-light-fsm-verilog.git
+   ```
+2. Open the project in **Xilinx Vivado**
+3. Add source files from the `/src` directory
+4. Run **Behavioral Simulation**
+5. Observe state transitions on the waveform viewer
 
 ---
 
-##  Evaluation and Notes
+## 📚 What I Learned
 
-The project was evaluated with a score of **80/100**.
-
-Point deductions were mainly due to:
-- The circuit not being fully implemented in Logisim  
-- Minor timing inaccuracies and synchronization issues  
-
-Additionally, the project was recognized for having one of the best visual designs.
+- Designing and implementing Moore FSMs in Verilog HDL
+- Writing testbenches for simulation and verification
+- Using Vivado for synthesis and timing analysis
+- Translating real-world logic problems into digital circuit design
 
 ---
 
-##  Demo
+## 📄 Course
 
-media/demo.mp4
-
----
+**Digital Design** — Konya Food & Agriculture University, 2025–2026
